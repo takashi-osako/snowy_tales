@@ -4,3 +4,5 @@
 *.jar
 *.war
 *.ear
+PDFGenerator/target/*
+PDFGenerator/.settings/*
