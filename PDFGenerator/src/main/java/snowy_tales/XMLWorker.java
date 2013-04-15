@@ -20,7 +20,7 @@ import com.itextpdf.tool.xml.XMLWorkerHelper;
 public class XMLWorker {
 	
 	public void createPDF(String htmlFileName) {
-	    Document document = new Document();
+	    Document document = new Document(PageSize.LETTER);
 	    document.addAuthor("testing");
 	    document.addCreationDate();
 	    document.addProducer();
@@ -30,7 +30,7 @@ public class XMLWorker {
 	    
 	    PdfWriter writer;
 		try {
-			writer = PdfWriter.getInstance(document, new FileOutputStream("/Users/dorisip/results.pdf"));
+			writer = PdfWriter.getInstance(document, new FileOutputStream("/Users/tosako/results.pdf"));
 			document.open();
 			
 			// this works
