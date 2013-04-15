@@ -1,0 +1,178 @@
+{
+  "components": [
+    {
+      "tool": {
+        "style": [
+          {
+            "defaultss": "courier",
+            "selection": [
+              "arial",
+              "courier"
+            ],
+            "name": "font face",
+            "input_type": "string",
+            "editable": false,
+            "css": "font-family: %s;"
+          },
+          {
+            "selection": [
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "name": "font size",
+            "input_type": "int",
+            "editable": true,
+            "html": "<input type='text'>",
+            "defaults": 12,
+            "css": "font-size: %dpt;"
+          },
+          {
+            "input_type": "bool",
+            "editable": true,
+            "name": "Italic",
+            "css": "font-style:italic;",
+            "defaults": false
+          },
+          {
+            "intput_type": "bool",
+            "editable": true,
+            "name": "Bold",
+            "defaults": false,
+            "css": "font-weight: bold;"
+          },
+          {
+            "input_type": "bool",
+            "editable": true,
+            "name": "Underline",
+            "css": "text-decoration:underline;",
+            "defaults": false
+          },
+          {
+            "selection": [
+              "right",
+              "center",
+              "left",
+              "justify"
+            ],
+            "name": "text-align",
+            "input_type": "string",
+            "editable": false,
+            "defaults": "left",
+            "css": "text-align:%s;"
+          },
+          {
+            "input_type": "string",
+            "html": "<textarea/>",
+            "editable": true,
+            "name": "text"
+          }
+        ],
+        "html": "<div class='ui-widget-content resizable draggable'>This is static text and click me</div>",
+        "type": "STATIC_TEXT",
+        "name": "Static Text",
+        "resizable": true,
+        "value": ""
+      },
+      "value": "This is static text and click me",
+      "height": 50,
+      "width": 150,
+      "top": 111,
+      "left": 141.75,
+      "type": "STATIC_TEXT"
+    },
+    {
+      "tool": {
+        "style": [
+          {
+            "defaultss": "courier",
+            "selection": [
+              "arial",
+              "courier"
+            ],
+            "name": "font face",
+            "input_type": "string",
+            "editable": false,
+            "css": "font-family: %s;"
+          },
+          {
+            "selection": [
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14
+            ],
+            "name": "font size",
+            "input_type": "int",
+            "editable": true,
+            "html": "<input type='text'>",
+            "defaults": 12,
+            "css": "font-size: %dpt;"
+          },
+          {
+            "input_type": "bool",
+            "editable": true,
+            "name": "Italic",
+            "css": "font-style:italic;",
+            "defaults": false
+          },
+          {
+            "intput_type": "bool",
+            "editable": true,
+            "name": "Bold",
+            "defaults": false,
+            "css": "font-weight: bold;"
+          },
+          {
+            "input_type": "bool",
+            "editable": true,
+            "name": "Underline",
+            "css": "text-decoration:underline;",
+            "defaults": false
+          },
+          {
+            "selection": [
+              "right",
+              "center",
+              "left",
+              "justify"
+            ],
+            "name": "text-align",
+            "input_type": "string",
+            "editable": false,
+            "defaults": "left",
+            "css": "text-align:%s;"
+          },
+          {
+            "input_type": "string",
+            "html": "<textarea/>",
+            "editable": true,
+            "name": "text"
+          }
+        ],
+        "html": "<div class='ui-widget-content resizable draggable'>This is static text and click me</div>",
+        "type": "STATIC_TEXT",
+        "name": "Static Text",
+        "resizable": true,
+        "value": ""
+      },
+      "value": "This is static text and click me",
+      "height": 50,
+      "width": 150,
+      "top": 48.75,
+      "left": 133.5,
+      "type": "STATIC_TEXT"
+    }
+  ]
+}
