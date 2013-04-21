@@ -25,12 +25,13 @@ public class App {
 		System.out.println("Hello World!");
 		try {
 			PDFManager pdfManager = new PDFManager("/Users/tosako/test1.pdf");
+			StaticTextManager staticTextManager = new StaticTextManager(pdfManager);
 			Map<String, Object> data = JSONReader
-					.getMap("/Users/tosako/git/snowy_tales/PDFGenerator/src/resources/template.json");
+					.getMap("/tmp/template.json");
 			TemplateManager templateManager = new TemplateManager(data);
 			List<StaticText> texts = templateManager.getStaticText();
 			for (StaticText text : texts) {
-				StaticTextManager.addToPDF(pdfManager, text);
+				staticTextManager.add(text);
 			}
 			pdfManager.close();
 		} catch (Exception e) {
