@@ -11,6 +11,7 @@ import com.itextpdf.text.html.WebColors;
 import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfContentByte;
 
+import snowy_tales.factory.FontFactory;
 import snowy_tales.tools.StaticText;
 
 public class StaticTextManager {
@@ -42,7 +43,7 @@ public class StaticTextManager {
 	 * Add static text to PDF
 	 * 
 	 * @param text
-	 * @throws DocumentException 
+	 * @throws DocumentException
 	 */
 	public void add(StaticText text) throws DocumentException {
 		Rectangle rectangle = getRectangle(text);
@@ -70,10 +71,27 @@ public class StaticTextManager {
 
 		// preparing filing a text
 		ColumnText column = new ColumnText(under);
-		column.setSimpleColumn(new Phrase(text.getValue()),
+		column.setSimpleColumn(
+				new Phrase(text.getValue(), FontFactory.createFont(
+						text.getFontFamily(), text.getFontSize())),
 				rectangle.getLeft(), rectangle.getBottom(),
-				rectangle.getRight(), rectangle.getTop(), text.getFontSize(),
-				Element.ALIGN_LEFT);
-		column.go(); //draw content of column
+				rectangle.getRight(), rectangle.getTop(),
+				(float) (text.getFontSize() * 1.5), StaticTextManager.getTextAlign(text.getTextAlign()));
+		column.go(); // draw content of column
+	}
+
+	private static int getTextAlign(String text_align) {
+		int align = 0;
+		text_align = text_align.toLowerCase();
+		if (text_align.equals("left")) {
+			align = Element.ALIGN_LEFT;
+		} else if (text_align.equals("right")) {
+			align = Element.ALIGN_RIGHT;
+		}else if (text_align.equals("center")) {
+			align = Element.ALIGN_CENTER;
+		}else if (text_align.equals("justify")) {
+			align = Element.ALIGN_JUSTIFIED;
+		}
+		return align;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import snowy_tales.factory.ComponentFactory;
 import snowy_tales.tools.StaticText;
 
 public class TemplateManager {
@@ -14,7 +15,7 @@ public class TemplateManager {
 		List<LinkedHashMap<String, Object>> list = (List<LinkedHashMap<String, Object>>) data
 				.get("components");
 		for (LinkedHashMap<String, Object> component : list) {
-			staticText.add(ComponentCreator.createStaticText(component));
+			staticText.add(ComponentFactory.createStaticText(component));
 		}
 	}
 
