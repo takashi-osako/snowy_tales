@@ -16,6 +16,9 @@ public class ComponentFactory {
 		text.setFontSize(templateDataManager.getIntValue("font-size"));
 		text.setFontFamily(templateDataManager.getStringValue("font-family"));
 		text.setTextAlign(templateDataManager.getStringValue("text-align"));
+		text.setColor(templateDataManager.getStringValue("color"));
+		text.setBackgrounColor(templateDataManager.getStringValue("background-color"));
+		
 		return text;
 	}
 

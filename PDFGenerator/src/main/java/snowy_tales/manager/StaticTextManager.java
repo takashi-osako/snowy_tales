@@ -11,6 +11,7 @@ import com.itextpdf.text.html.WebColors;
 import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfContentByte;
 
+import snowy_tales.factory.ColorFactory;
 import snowy_tales.factory.FontFactory;
 import snowy_tales.tools.StaticText;
 
@@ -52,9 +53,11 @@ public class StaticTextManager {
 
 		under.saveState();
 
-		// background color. this is just temporary.
-		BaseColor color = WebColors.getRGBColor("#F2F2F2");
-		under.setColorFill(color);
+		// background color.
+		BaseColor gbcolor = ColorFactory.getColor(text.getBackgrounColor(), BaseColor.WHITE);
+		if (gbcolor != null) {
+			under.setColorFill(gbcolor);
+		}
 		under.rectangle(rectangle.getLeft(), rectangle.getBottom(),
 				rectangle.getWidth(), rectangle.getHeight());
 		// fill background color
@@ -73,10 +76,11 @@ public class StaticTextManager {
 		ColumnText column = new ColumnText(under);
 		column.setSimpleColumn(
 				new Phrase(text.getValue(), FontFactory.createFont(
-						text.getFontFamily(), text.getFontSize())),
+						text.getFontFamily(), text.getFontSize(), text.getColor())),
 				rectangle.getLeft(), rectangle.getBottom(),
 				rectangle.getRight(), rectangle.getTop(),
-				(float) (text.getFontSize() * 1.5), StaticTextManager.getTextAlign(text.getTextAlign()));
+				(float) (text.getFontSize() * 1.5),
+				StaticTextManager.getTextAlign(text.getTextAlign()));
 		column.go(); // draw content of column
 	}
 
@@ -87,9 +91,9 @@ public class StaticTextManager {
 			align = Element.ALIGN_LEFT;
 		} else if (text_align.equals("right")) {
 			align = Element.ALIGN_RIGHT;
-		}else if (text_align.equals("center")) {
+		} else if (text_align.equals("center")) {
 			align = Element.ALIGN_CENTER;
-		}else if (text_align.equals("justify")) {
+		} else if (text_align.equals("justify")) {
 			align = Element.ALIGN_JUSTIFIED;
 		}
 		return align;
