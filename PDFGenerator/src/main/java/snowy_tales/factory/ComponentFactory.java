@@ -7,8 +7,7 @@ import snowy_tales.tools.Base;
 import snowy_tales.tools.StaticText;
 
 public class ComponentFactory {
-	public static StaticText createStaticText(
-			LinkedHashMap<String, Object> data) {
+	public static StaticText createStaticText(LinkedHashMap<String, Object> data) {
 		StaticText text = new StaticText();
 		TemplateDataManager templateDataManager = new TemplateDataManager(data);
 		initBase(text, templateDataManager);
@@ -17,8 +16,11 @@ public class ComponentFactory {
 		text.setFontFamily(templateDataManager.getStringValue("font-family"));
 		text.setTextAlign(templateDataManager.getStringValue("text-align"));
 		text.setColor(templateDataManager.getStringValue("color"));
-		text.setBackgrounColor(templateDataManager.getStringValue("background-color"));
-		
+		text.setBackgrounColor(templateDataManager
+				.getStringValue("background-color"));
+		text.setVerticalAlign(templateDataManager
+				.getStringValue("vertical-align"));
+
 		return text;
 	}
 

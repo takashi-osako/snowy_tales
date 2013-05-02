@@ -54,7 +54,8 @@ public class StaticTextManager {
 		under.saveState();
 
 		// background color.
-		BaseColor gbcolor = ColorFactory.getColor(text.getBackgrounColor(), BaseColor.WHITE);
+		BaseColor gbcolor = ColorFactory.getColor(text.getBackgrounColor(),
+				BaseColor.WHITE);
 		if (gbcolor != null) {
 			under.setColorFill(gbcolor);
 		}
@@ -73,14 +74,15 @@ public class StaticTextManager {
 		under.restoreState();
 
 		// preparing filing a text
-		ColumnText column = new ColumnText(under);
-		column.setSimpleColumn(
-				new Phrase(text.getValue(), FontFactory.createFont(
-						text.getFontFamily(), text.getFontSize(), text.getColor())),
-				rectangle.getLeft(), rectangle.getBottom(),
-				rectangle.getRight(), rectangle.getTop(),
-				(float) (text.getFontSize() * 1.5),
-				StaticTextManager.getTextAlign(text.getTextAlign()));
+		/*
+		 * ColumnText column = new ColumnText(under); column.setSimpleColumn(
+		 * new Phrase(text.getValue(), FontFactory.createFont(
+		 * text.getFontFamily(), text.getFontSize(), text.getColor())),
+		 * rectangle.getLeft(), rectangle.getBottom(), rectangle.getRight(),
+		 * rectangle.getTop(), (float) (text.getFontSize() * 1.5),
+		 * StaticTextManager.getTextAlign(text.getTextAlign()));
+		 */
+		ColumnText column = createText(under, rectangle, text);
 		column.go(); // draw content of column
 	}
 
@@ -97,5 +99,33 @@ public class StaticTextManager {
 			align = Element.ALIGN_JUSTIFIED;
 		}
 		return align;
+	}
+
+	private ColumnText createText(PdfContentByte content, Rectangle rectangle,
+			StaticText text) throws DocumentException {
+		int fontSize = text.getFontSize();
+		ColumnText column = new ColumnText(content);
+		Phrase phrase = new Phrase(text.getValue(), FontFactory.createFont(
+				text.getFontFamily(), fontSize, text.getColor()));
+		column.setSimpleColumn(rectangle);
+		column.addText(phrase);
+
+
+		if ("middle".equals(text.getVerticalAlign())) {
+			ColumnText simulateColumn=ColumnText.duplicate(column);
+
+			// simulate and find how many lines are written
+			simulateColumn.go(true);
+			int lineWritten = simulateColumn.getLinesWritten();
+			if (lineWritten > 0) {
+				float top = (rectangle.getTop() - rectangle.getBottom())
+						/ 2.0f + fontSize + rectangle.getBottom();
+				float leading = simulateColumn.getLeading();
+				float new_top = top + leading / (float) lineWritten;
+				column.setYLine(new_top);
+			}
+		}
+
+		return column;
 	}
 }

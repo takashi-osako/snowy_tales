@@ -22,6 +22,8 @@ public class ColorFactory {
 				color = BaseColor.ORANGE;
 			}else if ("light grey".equals(string_color.toLowerCase())) {
 				color = BaseColor.LIGHT_GRAY;
+			}else if("cyan".equals(string_color.toLowerCase())) {
+				color = BaseColor.CYAN;
 			}
 		}
 		return color;
