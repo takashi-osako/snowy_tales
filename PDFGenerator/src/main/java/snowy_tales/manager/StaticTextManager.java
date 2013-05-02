@@ -103,25 +103,24 @@ public class StaticTextManager {
 
 	private ColumnText createText(PdfContentByte content, Rectangle rectangle,
 			StaticText text) throws DocumentException {
-		int fontSize = text.getFontSize();
 		ColumnText column = new ColumnText(content);
 		Phrase phrase = new Phrase(text.getValue(), FontFactory.createFont(
-				text.getFontFamily(), fontSize, text.getColor()));
+				text.getFontFamily(), text.getFontSize(), text.getColor()));
 		column.setSimpleColumn(rectangle);
 		column.addText(phrase);
 
-
 		if ("middle".equals(text.getVerticalAlign())) {
-			ColumnText simulateColumn=ColumnText.duplicate(column);
+			ColumnText simulateColumn = ColumnText.duplicate(column);
 
 			// simulate and find how many lines are written
 			simulateColumn.go(true);
 			int lineWritten = simulateColumn.getLinesWritten();
 			if (lineWritten > 0) {
-				float top = (rectangle.getTop() - rectangle.getBottom())
-						/ 2.0f + fontSize + rectangle.getBottom();
 				float leading = simulateColumn.getLeading();
-				float new_top = top + leading / (float) lineWritten;
+				float top = (rectangle.getTop() - rectangle.getBottom()) / 2.0f
+						+ leading / 2.0f + rectangle.getBottom();
+
+				float new_top = top + (leading * lineWritten) / 2.0f;
 				column.setYLine(new_top);
 			}
 		}
