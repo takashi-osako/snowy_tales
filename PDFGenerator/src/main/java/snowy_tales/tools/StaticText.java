@@ -8,6 +8,9 @@ public class StaticText extends Base {
 	private String verticalAlign = null;
 	private String color = null;
 	private String backgrounColor = null;
+	private Boolean italic = false;
+	private Boolean bold = false;
+	private Boolean underline = false;
 
 	public String getValue() {
 		return value;
@@ -63,5 +66,29 @@ public class StaticText extends Base {
 
 	public void setBackgrounColor(String backgrounColor) {
 		this.backgrounColor = backgrounColor;
+	}
+
+	public Boolean isItalic() {
+		return this.italic;
+	}
+
+	public void setItalic(Boolean isItalic) {
+		this.italic = isItalic;
+	}
+
+	public Boolean isBold() {
+		return this.bold;
+	}
+
+	public void setBold(Boolean isBold) {
+		this.bold = isBold;
+	}
+
+	public Boolean isUnderlined() {
+		return this.underline;
+	}
+
+	public void setUnderlined(Boolean isUnderlined) {
+		this.underline = isUnderlined;
 	}
 }

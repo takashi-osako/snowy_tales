@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.html.WebColors;
@@ -95,8 +96,10 @@ public class StaticTextManager {
 	private ColumnText createText(PdfContentByte content, Rectangle rectangle,
 			StaticText text) throws DocumentException {
 		ColumnText column = new ColumnText(content);
-		Phrase phrase = new Phrase(text.getValue(), FontFactory.createFont(
-				text.getFontFamily(), text.getFontSize(), text.getColor()));
+		Font font = FontFactory.createFont(text.getFontFamily(),
+				text.getFontSize(), text.getColor(), text.isItalic(),
+				text.isBold(), text.isUnderlined());
+		Phrase phrase = new Phrase(text.getValue(), font);
 		column.setSimpleColumn(rectangle);
 		column.addText(phrase);
 

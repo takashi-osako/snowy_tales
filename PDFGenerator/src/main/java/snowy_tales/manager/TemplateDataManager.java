@@ -52,6 +52,15 @@ public class TemplateDataManager {
 		}
 		return rtn;
 	}
+	
+	public Boolean getBooleanValue(String name){
+		Boolean rtn = false;
+		Object value = getValue(name);
+		if (value != null){ 
+			rtn = (Boolean) value;
+		}
+		return rtn;
+	}
 
 	private Object getValue(String name) {
 		LinkedHashMap<String, Object> target_data = (LinkedHashMap<String, Object>) this.data

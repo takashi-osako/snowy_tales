@@ -20,6 +20,10 @@ public class ComponentFactory {
 				.getStringValue("background-color"));
 		text.setVerticalAlign(templateDataManager
 				.getStringValue("vertical-align"));
+		text.setItalic(templateDataManager.getBooleanValue("font-style"));
+		text.setBold(templateDataManager.getBooleanValue("font-weight"));
+		text.setUnderlined(templateDataManager
+				.getBooleanValue("text-decoration"));
 
 		return text;
 	}
