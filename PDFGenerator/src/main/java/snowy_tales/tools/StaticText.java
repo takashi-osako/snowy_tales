@@ -11,6 +11,8 @@ public class StaticText extends Base {
 	private Boolean italic = false;
 	private Boolean bold = false;
 	private Boolean underline = false;
+	private String borderStyle = null;
+	private int borderWidth = 0;
 
 	public String getValue() {
 		return value;
@@ -90,5 +92,21 @@ public class StaticText extends Base {
 
 	public void setUnderlined(Boolean isUnderlined) {
 		this.underline = isUnderlined;
+	}
+
+	public String getBorderStyle() {
+		return borderStyle;
+	}
+
+	public void setBorderStyle(String borderStyle) {
+		this.borderStyle = borderStyle;
+	}
+
+	public int getBorderWidth() {
+		return borderWidth;
+	}
+
+	public void setBorderWidth(int borderWidth) {
+		this.borderWidth = borderWidth;
 	}
 }

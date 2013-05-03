@@ -24,6 +24,8 @@ public class ComponentFactory {
 		text.setBold(templateDataManager.getBooleanValue("font-weight"));
 		text.setUnderlined(templateDataManager
 				.getBooleanValue("text-decoration"));
+		text.setBorderStyle(templateDataManager.getStringValue("border-style"));
+		text.setBorderWidth(templateDataManager.getIntValue("border-width"));
 
 		return text;
 	}

@@ -67,10 +67,7 @@ public class StaticTextManager {
 
 		// PDF over layer
 		PdfContentByte over = pdfManager.getWriter().getDirectContent();
-		over.rectangle(rectangle.getLeft(), rectangle.getBottom(),
-				rectangle.getWidth(), rectangle.getHeight());
-		// stroke border
-		over.stroke();
+		drawBorder(over, rectangle, text);
 
 		under.restoreState();
 
@@ -79,11 +76,9 @@ public class StaticTextManager {
 	}
 
 	private static int getTextAlign(String text_align) {
-		int align = 0;
+		int align = Element.ALIGN_LEFT;
 		text_align = text_align.toLowerCase();
-		if (text_align.equals("left")) {
-			align = Element.ALIGN_LEFT;
-		} else if (text_align.equals("right")) {
+		if (text_align.equals("right")) {
 			align = Element.ALIGN_RIGHT;
 		} else if (text_align.equals("center")) {
 			align = Element.ALIGN_CENTER;
@@ -91,6 +86,25 @@ public class StaticTextManager {
 			align = Element.ALIGN_JUSTIFIED;
 		}
 		return align;
+	}
+
+	private void drawBorder(PdfContentByte context, Rectangle rectangle,
+			StaticText text) {
+		// "none", "solid", "dotted", "dashed", "double"
+		int width = text.getBorderWidth();
+		if (width > 0 && "solid".equals(text.getBorderStyle())) {
+			context.rectangle(rectangle.getLeft(), rectangle.getBottom(),
+					rectangle.getWidth(), rectangle.getHeight());
+			context.setLineWidth(width);
+			context.stroke();
+		} else if (width > 0 && "dotted".equals(text.getBorderStyle())) {
+			context.rectangle(rectangle.getLeft(), rectangle.getBottom(),
+					rectangle.getWidth(), rectangle.getHeight());
+			context.setLineWidth(width);
+			context.setLineDash(width, 1);
+			context.stroke();
+		}
+
 	}
 
 	private ColumnText createText(PdfContentByte content, Rectangle rectangle,
@@ -130,7 +144,7 @@ public class StaticTextManager {
 				column.setYLine(new_top);
 			}
 		}
-
+		column.setAlignment(getTextAlign(text.getTextAlign()));
 		return column;
 	}
 }
