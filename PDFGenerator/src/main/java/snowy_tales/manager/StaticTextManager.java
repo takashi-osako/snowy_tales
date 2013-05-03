@@ -73,15 +73,6 @@ public class StaticTextManager {
 
 		under.restoreState();
 
-		// preparing filing a text
-		/*
-		 * ColumnText column = new ColumnText(under); column.setSimpleColumn(
-		 * new Phrase(text.getValue(), FontFactory.createFont(
-		 * text.getFontFamily(), text.getFontSize(), text.getColor())),
-		 * rectangle.getLeft(), rectangle.getBottom(), rectangle.getRight(),
-		 * rectangle.getTop(), (float) (text.getFontSize() * 1.5),
-		 * StaticTextManager.getTextAlign(text.getTextAlign()));
-		 */
 		ColumnText column = createText(under, rectangle, text);
 		column.go(); // draw content of column
 	}
@@ -121,6 +112,18 @@ public class StaticTextManager {
 						+ leading / 2.0f + rectangle.getBottom();
 
 				float new_top = top + (leading * lineWritten) / 2.0f;
+				column.setYLine(new_top);
+			}
+		} else if ("bottom".equals(text.getVerticalAlign())) {
+			ColumnText simulateColumn = ColumnText.duplicate(column);
+
+			// simulate and find how many lines are written
+			simulateColumn.go(true);
+			int lineWritten = simulateColumn.getLinesWritten();
+			if (lineWritten > 0) {
+				float leading = simulateColumn.getLeading();
+				float new_top = rectangle.getBottom() + (leading * lineWritten)
+						+ 3;
 				column.setYLine(new_top);
 			}
 		}
