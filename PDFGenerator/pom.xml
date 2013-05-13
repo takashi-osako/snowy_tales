@@ -31,6 +31,12 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.12</version>
 		</dependency>
+		<dependency>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>amqp-client</artifactId>
+			<version>3.0.4</version>
+			<!-- <version>3.1.0</version> -->
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -54,6 +60,7 @@
 							<goal>java</goal>
 						</goals>
 						<configuration>
+							<!-- <mainClass>snowy_tales.tasks.Worker</mainClass> -->
 							<mainClass>snowy_tales.App</mainClass>
 							<arguments>
 							</arguments>

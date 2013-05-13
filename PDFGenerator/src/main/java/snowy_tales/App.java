@@ -1,15 +1,7 @@
 package snowy_tales;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-
-import com.itextpdf.text.DocumentException;
-
 import snowy_tales.manager.PDFManager;
 import snowy_tales.manager.StaticTextManager;
 import snowy_tales.manager.TemplateManager;
@@ -21,10 +13,11 @@ import snowy_tales.tools.StaticText;
  * 
  */
 public class App {
-	public static void main(String[] args) {
-		System.out.println("Hello World!");
+	
+	public static void createPdf(String name){
+		System.out.println("Creating pdf");
 		try {
-			PDFManager pdfManager = new PDFManager("/Users/tosako/test1.pdf");
+			PDFManager pdfManager = new PDFManager("/tmp/" + name + ".pdf");
 			StaticTextManager staticTextManager = new StaticTextManager(pdfManager);
 			Map<String, Object> data = JSONReader
 					.getMap("/tmp/template.json");
@@ -38,5 +31,9 @@ public class App {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		App.createPdf("test1");
 	}
 }
