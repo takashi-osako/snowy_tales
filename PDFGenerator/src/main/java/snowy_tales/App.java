@@ -13,14 +13,15 @@ import snowy_tales.tools.StaticText;
  * 
  */
 public class App {
-	
-	public static void createPdf(String name){
-		System.out.println("Creating pdf");
+
+	public static void createPdf(String message) {
 		try {
-			PDFManager pdfManager = new PDFManager("/tmp/" + name + ".pdf");
-			StaticTextManager staticTextManager = new StaticTextManager(pdfManager);
-			Map<String, Object> data = JSONReader
-					.getMap("/tmp/template.json");
+			Map<String, Object> data = JSONReader.getMap(message);
+			String fileName = "/tmp/" + (String)data.get("_id") + ".pdf";
+			PDFManager pdfManager = new PDFManager(fileName);
+			System.out.println("Creating pdf " + fileName);
+			StaticTextManager staticTextManager = new StaticTextManager(
+					pdfManager);
 			TemplateManager templateManager = new TemplateManager(data);
 			List<StaticText> texts = templateManager.getStaticText();
 			for (StaticText text : texts) {
@@ -32,8 +33,8 @@ public class App {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void main(String[] args) {
-		App.createPdf("test1");
-	}
+
+	// public static void main(String[] args) {
+	// App.createPdf("test1");
+	// }
 }

@@ -60,8 +60,7 @@
 							<goal>java</goal>
 						</goals>
 						<configuration>
-							<!-- <mainClass>snowy_tales.tasks.Worker</mainClass> -->
-							<mainClass>snowy_tales.App</mainClass>
+							<mainClass>snowy_tales.tasks.Worker</mainClass>
 							<arguments>
 							</arguments>
 						</configuration>

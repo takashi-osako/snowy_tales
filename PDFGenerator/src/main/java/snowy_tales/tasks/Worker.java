@@ -43,9 +43,8 @@ public class Worker {
 			// Blocks until next message is received
 			QueueingConsumer.Delivery delivery = consumer.nextDelivery();
 			String message = new String(delivery.getBody());
-			System.out.println(" [x] Received '" + message + "'");
+			System.out.println(" [x] Received '");
 			// Call generate PDF
-			// Right now message is the file name
 			App.createPdf(message);
 			
 			channel.basicAck(delivery.getEnvelope().getDeliveryTag(), MULTIPLE_ACK);
