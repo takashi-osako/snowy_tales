@@ -5,16 +5,14 @@ import java.util.Map;
 import snowy_tales.manager.PDFManager;
 import snowy_tales.manager.StaticTextManager;
 import snowy_tales.manager.TemplateManager;
+import snowy_tales.reader.FileReader;
 import snowy_tales.reader.JSONReader;
 import snowy_tales.tools.StaticText;
 
-/**
- * Hello world!
- * 
- */
 public class App {
 
-	public static void createPdf(String message) {
+	public static byte[] createPdf(String message) {
+		byte [] pdfContent = null;
 		try {
 			Map<String, Object> data = JSONReader.getMap(message);
 			String fileName = "/tmp/" + (String)data.get("_id") + ".pdf";
@@ -28,10 +26,13 @@ public class App {
 				staticTextManager.add(text);
 			}
 			pdfManager.close();
+			
+			pdfContent = FileReader.readFile(fileName);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return pdfContent;
 	}
 
 	// public static void main(String[] args) {

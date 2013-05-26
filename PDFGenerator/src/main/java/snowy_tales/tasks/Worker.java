@@ -2,14 +2,17 @@ package snowy_tales.tasks;
 
 import snowy_tales.App;
 
+import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.QueueingConsumer;
+
 /**
  * Worker node to rabbitmq
+ * 
  * @author dorisip
- *
+ * 
  */
 public class Worker {
 
@@ -33,7 +36,7 @@ public class Worker {
 
 		channel.queueDeclare(QUEUE_NAME, DURABLE, EXCLUSIVE, AUTO_DELETE, null);
 		System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-		
+
 		channel.basicQos(PREFETCH_COUNT);
 
 		QueueingConsumer consumer = new QueueingConsumer(channel);
@@ -42,12 +45,21 @@ public class Worker {
 		while (true) {
 			// Blocks until next message is received
 			QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+			// newbie
+			BasicProperties props = delivery.getProperties();
+			BasicProperties replyProps = new BasicProperties.Builder()
+					.correlationId(props.getCorrelationId()).build();
+
 			String message = new String(delivery.getBody());
 			System.out.println(" [x] Received '");
 			// Call generate PDF
-			App.createPdf(message);
-			
-			channel.basicAck(delivery.getEnvelope().getDeliveryTag(), MULTIPLE_ACK);
+			byte [] pdfContent = App.createPdf(message);
+			// Acknowledge
+			// newbie
+			channel.basicPublish( "", props.getReplyTo(), replyProps, pdfContent);
+
+			channel.basicAck(delivery.getEnvelope().getDeliveryTag(),
+					MULTIPLE_ACK);
 		}
 	}
 
